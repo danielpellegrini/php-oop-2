@@ -4,19 +4,13 @@ class Eshop
 {
   protected $name;
 
-  private $products = [];
-
   public function __construct($name)
   {
     $this->name = $name;
   }
 
-  public function addProduct(Products $products) {
-    $this->products[] = $products;
-  }
-
-  public function getProducts() {
-    return $this->products;
+  public function getName() {
+    return $this->name;
   }
 
 }
@@ -28,12 +22,20 @@ class Products
   protected $category;
 
   protected $brand;
-
+  
   public function __construct(string $type, string $category, string $brand)
   {
     $this->type = $type;
     $this->category = $category;
     $this->brand = $brand;
+  }
+  
+  public function getTech() {
+    return $this->tech;
+  }
+
+  public function getFood() {
+    return $this->food;
   }
 
 }
@@ -48,7 +50,9 @@ class Tech extends Products
 
   protected $price;
 
-  public function __construct(int $id, string $model, string $image, float $price)
+  protected $type;
+
+  public function __construct(int $id, string $model, string $image, string $price)
   {
     $this->id = $id;
     $this->model = $model;
@@ -73,7 +77,7 @@ class User
   protected $email;
   protected $delivery = 4;
 
-  public function __construct(int $id, string $password, string $name, string $lastname, string $birthdate, string $email, string $delivery)
+  public function __construct(int $id, string $password, string $name, string $lastname, string $birthdate, string $email)
   {
     $this->id = $id;
     $this->password = $password;
@@ -81,7 +85,19 @@ class User
     $this->lastname = $lastname;
     $this->birthdate = $birthdate;
     $this->email = $email;
-    $this->delivery = $delivery;
+  }
+
+  public function getName(){
+    return $this->name;
+  }
+  public function getLast(){
+    return $this->lastname;
+  }
+  public function getBirth(){
+    return $this->birthdate;
+  }
+  public function getEmail(){
+    return $this->email;
   }
 
 }
@@ -114,21 +130,62 @@ class CreditCard
 
   }
 
-  public function getMoney(){
+  public function getNr()
+  {
+    return $this->number;
+  }
+
+  public function getHolder()
+  {
+    return $this->holder;
+  }
+
+  public function getExpir()
+  {
+    return $this->expiration;
+  }
+
+  public function getType()
+  {
+    return $this->type;
+  }
+
+  public function getBalance()
+  {
     return $this->balance;
   }
 }
 
-$techProduct = new Products('Laptop', 'Tech', 'MSI');
-$foodProduct = new Products('Pasta', 'Food', 'Molisana');
-
 $eShop = new Eshop('eThief');
 
-$eShop->addProduct($techProduct);
-$eShop->addProduct($foodProduct);
+$techProduct1 = new Products('Laptop', 'Tech', 'MSI');
+$laptop1 = new Tech(2435, 'GP 76', 'https://www.alternate.de/p/600x600/2/8/MSI_GP76_Leopard_10UG_291__Gaming_Notebook@@1712582.jpg', '10000,00' . '€');
+
+$foodProduct1 = new Products('Pasta', 'Food', 'Molisana');
+
+$user = new User(6545, '1q2w3e4r5t', 'Daniel', 'Pellegrini', '1987/11/18', 'danielpellegrini87@gmail.com');
+
+$creditCard = new CreditCard('1234 5678 9087 6543', 'Pellegrini Daniel', '02/2025', 'Credit Card', 15500.50);
 
 
-var_dump($eShop->getProducts());
+$primeUser = new PrimeUser(1539, '0p9o8i7u6y', 'Sabrina', 'Krüger', '1991/04/19', 'sabrinakruger@icloud.com');
+
+echo $eShop->getName();
+
+var_dump($laptop1);
+
+var_dump($primeUser);
+var_dump($user);
+
+
+
+
+
+
+
+
+
+
 
 
 
